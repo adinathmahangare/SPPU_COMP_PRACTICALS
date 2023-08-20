@@ -1,0 +1,152 @@
+Data Wrangling
+
+import pandas as pd
+df = pd.read_csv("ALCHOHOL.csv")
+df.shape
+df.dtypes
+df.describe()
+df.count(axis="rows")
+df.isna().sum()
+df.mean()
+df["Heart"].fillna(df["Heart"].mean(), inplace=True)
+df[" Alcohol "] = df[" Alcohol "].abs()
+df.loc[10, " Alcohol "] = 2.79
+df.loc[14, " Alcohol "] = 0.8
+dirtydf.head()
+dirtydf.dropna(subset=["Date"])
+dirtydf["Calories"] = dirtydf["Calories"].astype("int64")
+dirtydf["Date"] = pd.to_datetime(dirtydf["Date"])
+nba["Position"].replace({"SG":1, "PF":2, "PG":3, "SF":4, "C":5}, inplace = True)
+
+
+Calculating central tendencies
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import statistics
+import scipy.stats
+df=pd.read_csv("/content/Age-Income-Dataset - Sheet1.csv")
+# by standard libraries
+sum=df["Income"].sum()
+count=df["Income"].count()
+mean=sum/count
+mean
+# max by standard libraries
+mean=df["Income"].mean()
+mean
+# max by formula
+sum=0
+count=0
+for i in df["Income"]:
+  sum=sum+i
+  count=count+1
+mean=sum/count
+mean
+# by standard libraries
+median=df["Income"].median()
+median
+# by formula
+n = len(df["Income"])
+if n % 2:
+    median = sorted(df["Income"])[round(0.5*(n-1))]
+else:
+    ordered_income, index = sorted(df["Income"]), round(0.5 * n)
+    median = 0.5 * (ordered_income[index-1] + ordered_income[index])
+print(median)
+# max and min by standard libraries
+print("Maximum of income is :",df["Income"].max())
+print("Minimum of income is :",df["Income"].min())
+# max by formula
+max=0
+for i in df["Income"]:
+  if(max<i):
+    max=i   
+max
+# min by formula
+min=10000000
+for i in df["Income"]:
+  if(min>i):
+    min=i   
+min
+# variance by standard library
+variance = statistics.variance(df["Income"])
+variance
+# variance by formula
+count=0
+x=0
+for i in df["Income"]:
+  x=x+((i-mean)**2)
+  count=count+1
+var=x/(count-1)
+var
+# standard deviation by formula
+standard_d=var**0.5
+standard_d
+df.groupby("Age")[["Income"]].mean()
+df.groupby("Age")[["Income"]].median()
+df.groupby("Age")[["Income"]].min()
+df.groupby("Age")[["Income"]].max()
+df.groupby("Age")[["Income"]].std(ddof=1)
+
+
+Data Visualization 1
+
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+df.isnull().sum()
+df["Heart"].fillna(df["Heart"].mean(), inplace=True)
+sns.catplot(x ="sex", hue ="alive",kind ="count", data = df)
+group = df.groupby(['class', 'alive'])
+pclass_survived = group.size().unstack()
+sns.heatmap(pclass_survived, annot = True, fmt ="d")
+sns.violinplot(x ="who", y ="age", hue ="alive",data = df, split = True)
+sns.histplot(x= df["age"], y=df['fare'])
+
+
+Data Visualization 2
+
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+df=sns.load_dataset('titanic')
+sns.boxplot(df['sex'], df["age"])
+plt.show()
+sns.boxplot(x="sex", y="age", data=df, hue='survived')
+sns.violinplot(x="sex", y="age", data=df)
+sns.violinplot(x="sex", y="age", data=df, hue='survived')
+sns.swarmplot(x="sex", y="age", data=df, size=3)
+sns.swarmplot(x="sex", y="age", data=df, hue='survived', size=3)
+
+
+Data Visualization 3
+
+import pandas as pd
+import seaborn as sns
+import numpy as np
+iris = sns.load_dataset("iris")
+np.unique(iris["species"])
+import matplotlib
+import matplotlib.pyplot as plt
+%matplotlib inline
+fig, axes = plt.subplots(2, 2, figsize=(16, 8))
+axes[0,0].set_title("Distribution of First row first Column- sepal_length")
+axes[0,0].hist(iris["sepal_length"]);
+axes[1,0].set_title("Distribution of second row first Column- sepal_width")
+axes[1,0].hist(iris["sepal_width"]);
+axes[0,1].set_title("Distribution of first row second Column- petal_length")
+axes[0,1].hist(iris["petal_length"]);
+axes[1,1].set_title("Distribution of second row second Column- petal_width")
+axes[1,1].hist(iris["petal_width"]);
+sns.boxplot(x=iris["sepal_length"], y=iris["species"])
+data_to_plot = [iris["sepal_length"],iris["sepal_width"],iris["petal_length"],iris["petal_width"]]
+sns.set_style("whitegrid")
+fig = plt.figure(1, figsize=(12,8))
+ax = fig.add_subplot(111)
+bp = ax.boxplot(data_to_plot);
+
+
+
+

@@ -1,0 +1,36 @@
+word_count
+
+var map = sc.textFile("/opt/spark/bin/sample.txt").flatMap(line => line.split(" ")).map(word => (word,1));
+var counts = map.reduceByKey(_ + _);
+counts.saveAsTextFile("/opt/spark/bin/WD_fri")
+
+
+sort
+
+var map = sc.textFile("/opt/spark/bin/sample.txt").flatMap(line => line.split(" ")).map(word => (word,1));
+var counts = map.reduceByKey(_ + _);
+val keysRdd = counts.keys
+val sorted = keysRdd.sortBy(x => x, true)
+sorted.collect
+sorted.saveAsTextFile("/opt/spark/bin/sort_fri")
+
+
+max80
+
+val lines = sc.textFile("/opt/spark/bin/sample.txt")
+val longLines = lines filter { l => l.length > 80}
+longLines.saveAsTextFile("/opt/spark/bin/max80")
+
+
+log_file
+
+val lines = sc.textFile("/opt/spark/bin/weblog.txt") // read text file
+val errorLines = lines filter { l => l.contains("200")}
+val warningLines = lines filter { l => l.contains("302")}
+val errorCount = errorLines.count
+val warningCount = warningLines.count
+errorLines.saveAsTextFile("/opt/spark/bin/error_cnt1")
+warningLines.saveAsTextFile("/opt/spark/bin/warn_cnt1")
+
+
+	
