@@ -1,5 +1,3 @@
-Hello, this is Bing. I can help you write a GitHub description for your repository. Here is a possible description that you can use or modify as you wish:
-
 # SPPU-CSE-Practicals 🎓
 
 This repository contains all the files for the practical examination of Savitribai Phule Pune University (SPPU) branch Computer Engineering (CSE) for all four years. It covers subjects like:
