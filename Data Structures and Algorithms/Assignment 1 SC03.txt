@@ -1,0 +1,104 @@
+﻿SC03
+Assignment No. 01
+
+
+#Consider telephone book database of N clients. Make use of a hash table implementation 
+#to quickly look up client’s telephone number. Make use of two collision handling
+#techniques and compare them using number of comparisons required to find a set of 
+#telephone numbers. (Use Python Programming Language).
+
+def hash_func(key, m):
+    return key % m
+
+
+def linear_insert(hash_table, key, m):
+    pos = hash_func(key, m)
+    original_pos = pos
+    if hash_table[pos] == -1:
+        hash_table[pos] = key
+        return hash_table
+    else:
+        while hash_table[pos] != -1:
+            pos = (pos + 1) % m
+            if pos == original_pos:
+                print("element {} cannot be inserted".format(key))
+                return hash_table
+        hash_table[pos] = key
+        return hash_table
+
+
+def linear_search(hash_table, key, m):
+    pos = hash_func(key, m)
+    original_pos = pos
+    counter = 0
+    if hash_table[pos] == key:
+        print("Element %d is found at position %d" % (key, pos))
+        return pos
+    else:
+        while hash_table[pos] != key:
+            counter += 1
+            pos = (pos + 1) % m
+            if pos == original_pos:
+                print("element not found in the table")
+        print("Element %d is found at position %d" % (key, pos))
+        print("Number of comparisons done are %d" % counter)
+        return pos
+
+def quad_insert(hash_table, key, m):
+    pos = hash_func(key, m)
+    original_pos = pos
+    i = 1
+    if hash_table[pos] == -1:
+        hash_table[pos] = key
+        return hash_table
+    else:
+        while hash_table[pos] != -1:
+            pos = (original_pos + (i * i)) % m
+            i += 1
+            if pos == original_pos:
+                print("element {} cannot be inserted".format(key))
+                return hash_table
+        hash_table[pos] = key
+        return hash_table
+
+
+def quad_search(hash_table, key, m):
+    pos = hash_func(key, m)
+    original_pos = pos
+    counter = 0
+    i = 1
+    if hash_table[pos] == key:
+        print("Element %d is found at position %d" % (key, pos))
+        return pos
+    else:
+        while hash_table[pos] != key:
+            counter += 1
+            pos = (original_pos + (i * i)) % m
+            i += 1
+            if pos == original_pos:
+                print("element not found in the table")
+        print("Element %d is found at position %d" % (key, pos))
+        print("Number of comparisons done are %d" % counter)
+        return pos
+
+
+def display(m, hash_table):
+    print("\n")
+    for i in range(m):
+        print("%s = %s" % (i, hash_table[i]))
+
+
+def main():
+    m = int(input("Enter the number of clients: "))
+    hash_table = [-1] * m
+
+    for i in range(m):
+        key = int(input("enter the telephone numbers of clients: "))
+        linear_insert(hash_table, key, m)
+        linear_search(hash_table, key, m)
+        quad_insert(hash_table, key, m)
+        quad_search(hash_table, key, m)
+        display(m, hash_table)
+
+
+main()
