@@ -11,6 +11,8 @@ This repository contains all the files for the practical examination of Savitrib
 - Information Technology
 - Machine Learning
 - Web Technology
+- Fundamentals of Data Structures
+- Data Structutre and Algorithms
 
 It includes programming languages like:
 
