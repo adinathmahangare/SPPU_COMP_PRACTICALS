@@ -22,6 +22,7 @@ It includes programming languages like:
 - Java ☕
 - PHP 🐘
 - CSS 🎨
+- C++ 
 
 And various platforms like:
 
@@ -31,6 +32,7 @@ And various platforms like:
 - Eclipse IDE 🌙
 - JUnit 🧪
 - Linux 🐧
+- CodeBlocks
 
 The repository is organized by year, semester, subject, and practical number. Each practical folder contains the following files:
 
